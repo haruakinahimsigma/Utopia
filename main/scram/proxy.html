@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scramjet Proxy</title>
+
+  <script src="/scram/scramjet.bundle.js"></script>
+  <script src="/scram/scramjet.sync.js"></script>
+  <script src="/scram/scramjet.all.js"></script>
+
+  <script type="module">
+    import config from "/scram/proxy.config.js";
+
+    window.Scramjet = window.Scramjet || {};
+    window.Scramjet.config = config;
+
+    window.Scramjet.init = async () => {
+      await window.Scramjet.start(config);
+    };
+
+    window.Scramjet.init();
+  </script>
+
+  <style>
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 40px;
+    }
+    input {
+      width: 80%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Scramjet Proxy</h1>
+  <p>Enter a URL to start browsing</p>
+
+  <input id="url" placeholder="https://example.com" />
+
+  <script>
+    const box = document.getElementById("url");
+
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const target = box.value.trim();
+        if (!target) return;
+
+        location.href = "/scram/" + target;
+      }
+    });
+  </script>
+</body>
+</html>
